@@ -1,8 +1,9 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pawprints/globals.dart';
 import 'package:pawprints/providers/primaryProvider.dart';
 import 'package:pawprints/screens/timeline/timelineScreen.dart';
-import 'package:pawprints/screens/posting/postingScreen.dart';
+import 'package:pawprints/screens/posting/createPostScreen.dart';
 
 class PrimaryScreen extends StatelessWidget {
   PrimaryScreen({super.key});
@@ -17,7 +18,7 @@ class PrimaryScreen extends StatelessWidget {
         break;
       case 1:
         screenWidget = Center(
-          child: PostingScreen(),
+          child: CreatePostScreen(),
         );
         break;
       case 2:
@@ -106,7 +107,7 @@ class RadiantGradientMask extends StatelessWidget {
       shaderCallback: (bounds) => RadialGradient(
         center: alignment,
         radius: 1,
-        colors: const [Colors.pinkAccent, Colors.purpleAccent],
+        colors: userGradient,
         tileMode: TileMode.mirror,
       ).createShader(bounds),
       child: child,

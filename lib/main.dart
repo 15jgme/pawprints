@@ -33,9 +33,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blue),
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
-        '/': ((context) => LoginScreen()),
+        '/login': ((context) => LoginScreen()),
         '/primary': ((context) => PrimaryScreen()),
       },
     );

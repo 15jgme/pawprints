@@ -14,10 +14,10 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if ((context.watch<LoginProvider>().loginState == state.success) &
-        (!context.watch<LoginProvider>().userHasInteracted)) {
-      Navigator.pushNamed(context, '/primary');
-    }
+    // if ((context.watch<LoginProvider>().loginState == state.success) &
+    //     (!context.watch<LoginProvider>().userHasInteracted)) {
+    //   Navigator.pushNamed(context, '/primary');
+    // }
 
     Future<void> _showMyDialog(String errorMessage) async {
       return showDialog<void>(
@@ -111,8 +111,8 @@ class LoginScreen extends StatelessWidget {
               child: Blob.random(
                 size: 1200,
                 styles: BlobStyles(
-                    gradient: const LinearGradient(
-                  colors: [Colors.pinkAccent, Colors.purpleAccent],
+                    gradient: LinearGradient(
+                  colors: userGradient,
                 ).createShader(
                         Rect.fromCircle(center: Offset(200, 0), radius: 150))),
               ),
@@ -175,7 +175,11 @@ class LoginScreen extends StatelessWidget {
                       showDialog: _showMessage,
                       text: !context.watch<LoginProvider>().appStateSignin
                           ? "sign-up"
-                          : "log-in"),
+                          : "log-in",
+                      pageContext: context,
+                      navigateLogin: () {
+                        Navigator.pushNamed(context, '/primary');
+                      }),
                 ],
               ),
             ),
@@ -234,18 +238,21 @@ class SubmitButton extends StatelessWidget {
 
   Function(String) showErrorDialog;
   Function(String) showDialog;
+  BuildContext pageContext;
+  late Function() navigateLogin;
 
   SubmitButton(
       {required String this.text,
       required Function(String) this.showErrorDialog,
       required Function(String) this.showDialog,
+      required BuildContext this.pageContext,
+      required Function() this.navigateLogin,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     void _onPress() {
-      debugPrint("foooooo");
       context.read<LoginProvider>().setButtonState(true);
       if (!context.read<LoginProvider>().appStateSignin &&
           (context.read<LoginProvider>().password !=
@@ -270,7 +277,7 @@ class SubmitButton extends StatelessWidget {
             } else
             // Check if we are ok to login
             if (context.read<LoginProvider>().loginState == state.success) {
-              Navigator.pushNamed(context, '/primary');
+              navigateLogin();
             } else if (context.read<LoginProvider>().loginState ==
                 state.accountCreated) {
               showDialog(context.read<LoginProvider>().dialogMessage);
@@ -300,8 +307,7 @@ class SubmitButton extends StatelessWidget {
         // textStyle: submitTextStyle,
         backgroundColor: Colors.black,
         borderColor: Colors.white,
-        selectedGradientColor:
-            LinearGradient(colors: [Colors.pinkAccent, Colors.purpleAccent]),
+        selectedGradientColor: LinearGradient(colors: userGradient),
         borderRadius: 50,
         borderWidth: 2,
         onPress: _onPress,
