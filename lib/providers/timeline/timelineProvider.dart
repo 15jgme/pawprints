@@ -74,7 +74,12 @@ class TimelineProvider with ChangeNotifier {
             endOfPostsReached = true;
           }
           for (RecordModel post in value.items) {
-            _timeline.insert(_timeline.length - 1, CardBuilder(postData: post));
+            _timeline.insert(
+                _timeline.length - 1,
+                CardBuilder(
+                  postData: post,
+                  enableLiking: true,
+                ));
             if (endOfPostsReached) {
               _timeline[_timeline.length - 1] = PaddedProgressIndicator(
                 showWidget: false,

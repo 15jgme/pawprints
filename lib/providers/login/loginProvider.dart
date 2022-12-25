@@ -78,8 +78,9 @@ class LoginProvider with ChangeNotifier {
         _errorMessage = "Unknown error, try again later";
       }
       return null;
-    }).timeout(Duration(seconds: 10), onTimeout: () {
+    }).timeout(Duration(seconds: 20), onTimeout: () {
       setLoginState(state.error);
+      _errorMessage = "Server took too long to respond";
       return null;
     });
   }

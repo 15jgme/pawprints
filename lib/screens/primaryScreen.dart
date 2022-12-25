@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pawprints/screens/profile/profileScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:pawprints/globals.dart';
 import 'package:pawprints/providers/primaryProvider.dart';
@@ -23,7 +24,7 @@ class PrimaryScreen extends StatelessWidget {
         break;
       case 2:
         screenWidget = Center(
-          child: Text("bar"),
+          child: ProfileScreen(),
         );
         break;
       case 3:
@@ -76,7 +77,6 @@ class BottomBar extends StatelessWidget {
         ),
       ],
       onTap: (value) {
-        debugPrint(value.toString());
         context.read<PrimaryProvider>().SetBottomBarIdx(value);
         switch (value) {
           case 1:
@@ -90,7 +90,7 @@ class BottomBar extends StatelessWidget {
         }
       },
       currentIndex: context.watch<PrimaryProvider>().bottom_bar_idx,
-      selectedItemColor: Colors.purple[300],
+      selectedItemColor: userGradient[1],
       unselectedItemColor: Colors.grey,
     );
   }

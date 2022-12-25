@@ -12,13 +12,17 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (_) =>
-                LoginProvider()), // Provider for the login state of the app
+          create: (_) => LoginProvider(),
+        ), // Provider for the login state of the app
         ChangeNotifierProvider(
-            create: (_) => TimelineProvider()), // Provider for the match screen
-        ChangeNotifierProvider(create: (_) => LoginProvider()),
+          create: (_) => TimelineProvider(),
+        ), // Provider for the match screen
         ChangeNotifierProvider(
-            create: (_) => PrimaryProvider()) // Provider for the match screen
+          create: (_) => PrimaryProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProfileProvider(),
+        )
       ],
       child: MyApp(),
     ),

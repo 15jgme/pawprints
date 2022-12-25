@@ -42,7 +42,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   RecordModel? userRecord;
 
   final ImagePicker _picker = ImagePicker();
-
   XFile? _imageFile;
 
   Future<void> _onImageButtonPressed(ImageSource source,
@@ -53,7 +52,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     try {
       final XFile? pickedFile = await _picker.pickImage(
         source: source,
-        imageQuality: 25,
+        imageQuality: 100,
         maxHeight: 1080,
         maxWidth: 1080,
       );
