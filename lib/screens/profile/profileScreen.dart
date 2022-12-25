@@ -151,7 +151,7 @@ void updatePhoto({required VoidCallback onFinish}) async {
       maxHeight: 1080,
       maxWidth: 1080,
     );
-    var image = await http.MultipartFile.fromPath("image", pickedFile!.path);
+    var image = await http.MultipartFile.fromPath("avatar", pickedFile!.path);
     await pb.collection('users').update(
       pb.authStore.model.id,
       files: [image],
